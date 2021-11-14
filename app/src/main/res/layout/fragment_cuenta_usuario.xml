@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="20dp"
+            >
+
+            <ImageView
+                android:id="@+id/imageViewCuenta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/splash_screen"
+                android:scaleType="centerInside"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvNombreCuenta"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:text="Usuarios Madrid"
+            android:textAlignment="textStart"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            tools:ignore="RtlCompat" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="25dp"
+        android:paddingLeft="15dp"
+        android:paddingBottom="5dp"
+        android:text="Protectora"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/secondaryTextColor"
+        android:background="?android:attr/listDivider"/>
+
+    <RelativeLayout
+        android:id="@+id/citasLayoutUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:id="@+id/tvTusCitas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Citas"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNumCitas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@+id/tvTusCitas"
+            android:text="(13)"
+            android:layout_centerInParent="true"
+            android:textSize="14dp"  />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:id="@+id/tvNoticias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Noticias"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:id="@+id/tvPerfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perfil"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="25dp"
+        android:paddingLeft="15dp"
+        android:paddingBottom="5dp"
+        android:text="Acerca de"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@color/secondaryTextColor"
+        android:background="?android:attr/listDivider"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:paddingStart="15dp">
+
+        <TextView
+            android:id="@+id/tvAcercaDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protectoras Madrid"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_arrow" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?android:attr/listDivider" />
+
+</LinearLayout>

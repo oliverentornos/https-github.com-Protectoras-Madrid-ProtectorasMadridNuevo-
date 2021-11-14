@@ -1,0 +1,124 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="InicioFragment">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="?android:attr/listDivider"
+            android:focusable="false"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="Buscar animal" />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <HorizontalScrollView
+        android:id="@+id/hsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="5dp">
+
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipUbicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicacion"
+                app:chipBackgroundColor="@color/primaryTextColor"
+                app:chipIcon="@drawable/ic_location"
+                app:chipIconSize="20dp"
+                app:chipStrokeColor="@color/primaryColor"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="7dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTamano"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamaño"
+                app:chipBackgroundColor="@color/primaryTextColor"
+                app:chipIcon="@drawable/ic_size"
+                app:chipIconSize="20dp"
+                app:chipStrokeColor="@color/primaryColor"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="7dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEspecie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Especie"
+                app:chipBackgroundColor="@color/primaryTextColor"
+                app:chipIcon="@drawable/ic_huella"
+                app:chipIconSize="20dp"
+                app:chipStrokeColor="@color/primaryColor"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="7dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipEdad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edad"
+                app:chipBackgroundColor="@color/primaryTextColor"
+                app:chipIcon="@drawable/ic_cake"
+                app:chipIconSize="20dp"
+                app:chipStrokeColor="@color/primaryColor"
+                app:chipStrokeWidth="1dp"
+                app:iconStartPadding="7dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+
+    </HorizontalScrollView>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="?android:attr/actionBarSize">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerId"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

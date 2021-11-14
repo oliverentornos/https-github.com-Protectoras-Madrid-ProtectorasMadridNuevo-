@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+  <TextView
+      android:id="@+id/ly"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentStart="true"
+      android:layout_alignTop="@id/ly"
+      android:textSize="20sp"
+      android:text="Min"/>
+
+    <TextView
+        android:id="@+id/ly2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/ly"
+        android:textSize="20sp"
+        android:text="Max"/>
+
+    <NumberPicker
+        android:id="@+id/numPickerMin"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ly"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="50dp"
+        android:theme="@style/MyAppTheme.NumberPicker" />
+
+    <NumberPicker
+        android:id="@+id/numPickerMax"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ly2"
+        android:layout_marginEnd="50dp"
+        android:theme="@style/MyAppTheme.NumberPicker" />
+</RelativeLayout>
