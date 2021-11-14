@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -281,28 +284,12 @@ public class AnimalActivity extends AppCompatActivity {
                     }
                 });
 
-                TextInputEditText etFechaHora = dialogPersonalizado.findViewById(R.id.etFechaHora);
-                etFechaHora.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        MaterialTimePicker materialTimePicker = new MaterialTimePicker.Builder()
-                                .setTimeFormat(TimeFormat.CLOCK_24H)
-                                .build();
+                AutoCompleteTextView spinner = dialogPersonalizado.findViewById(R.id.acHora);
+                String[] horas = {"10:00", "11:00","12:00", "13:00","14:00", "16:00","17:00", "18:00","19:00", "20:00"};
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, horas);
+                spinner.setAdapter(adapter);
 
 
-                        materialTimePicker.show(getSupportFragmentManager(), "tag");
-
-                        materialTimePicker.addOnPositiveButtonClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                int hour = materialTimePicker.getHour();
-                                String hora = String.valueOf(hour);
-                                etFechaHora.setText(hora);
-                            }
-                        });
-
-                    }
-                });
 
 
                 Button btnConfirmar = dialogPersonalizado.findViewById(R.id.btnConfirmar);
