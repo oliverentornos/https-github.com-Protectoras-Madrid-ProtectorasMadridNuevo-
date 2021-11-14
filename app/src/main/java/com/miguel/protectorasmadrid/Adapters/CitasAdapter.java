@@ -57,7 +57,7 @@ public class CitasAdapter extends RecyclerView.Adapter<CitasAdapter.ViewHolder> 
         holder.tvFecha.setText(listCitas.get(position).getFecha());
         holder.tvHora.setText(listCitas.get(position).getHora());
         holder.tvCliente.setText(listCitas.get(position).getNombre());
-        holder.tvAnimal.setText(listCitas.get(position).getAnimal());
+        holder.tvAnimal.setText(listCitas.get(position).getNombreAnimal());
         holder.tvEspecie.setText(listCitas.get(position).getEspecie());
     }
 

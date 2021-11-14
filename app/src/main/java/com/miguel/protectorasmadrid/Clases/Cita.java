@@ -9,11 +9,11 @@ public class Cita {
     String especie;
     int estado;
 
-    public Cita(String fecha, String hora, String nombre, String animal, String especie,  int estado) {
+    public Cita(String fecha, String hora, String nombre, String nombreAnimal, String especie, int estado) {
         this.fecha = fecha;
         this.hora = hora;
         this.nombre = nombre;
-        this.nombreAnimal = animal;
+        this.nombreAnimal = nombreAnimal;
         this.especie = especie;
         this.estado = estado;
     }
@@ -42,12 +42,12 @@ public class Cita {
         this.nombre = nombre;
     }
 
-    public String getAnimal() {
+    public String getNombreAnimal() {
         return nombreAnimal;
     }
 
-    public void setAnimal(String animal) {
-        this.nombreAnimal = animal;
+    public void setNombreAnimal(String nombreAnimal) {
+        this.nombreAnimal = nombreAnimal;
     }
 
     public String getEspecie() {
