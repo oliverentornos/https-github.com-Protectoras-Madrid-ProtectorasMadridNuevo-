@@ -17,10 +17,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -53,9 +57,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AnimalActivity extends AppCompatActivity {
+public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-
+    private GoogleMap mapa;
     private TextView tvNombre, tvDesc, tvFechaEntrada, tvFechaNacimiento, tvGenero, tvTamaño, tvProtectora;
     private ImageView imgvAtras, imgvShare;
     //private ImageView imagen;
@@ -74,6 +78,9 @@ public class AnimalActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animal);
+
+
+
         listafavsIDS = new ArrayList<>();
         //imagen = findViewById(R.id.imgvAnimal);
         tvNombre = findViewById(R.id.tvNombre);
@@ -97,6 +104,10 @@ public class AnimalActivity extends AppCompatActivity {
         AnimalApi serviceAnimal = Api.getClient().create(AnimalApi.class);
         Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
 
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+
+        mapFragment.getMapAsync(this);
 
         llamadaanimal.enqueue(new Callback<Animal>() {
             @Override
@@ -325,5 +336,10 @@ public class AnimalActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(compartir, "Compartir vía"));
             }
         });
+    }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mapa = googleMap;
     }
 }

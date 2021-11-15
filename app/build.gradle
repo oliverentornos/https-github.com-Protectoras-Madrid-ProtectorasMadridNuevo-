@@ -57,7 +57,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
 
     //Maps
-    implementation 'com.google.android.gms:play-services-maps:17.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
 
     //Boton Favoritos
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
