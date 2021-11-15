@@ -13,6 +13,7 @@ public class Animal implements Parcelable {
 
     int idAnimal;
     String protectora;
+    int idProtectora;
     String nombre;
     String tamanio;
     String estado;
@@ -30,47 +31,56 @@ public class Animal implements Parcelable {
     }
 
 
-
-    public Animal(Animal a) {
-        this.idAnimal = a.idAnimal;
-        this.protectora = a.protectora;
-        this.nombre = a.nombre;
-        this.tamanio = a.tamanio;
-        this.estado = a.estado;
-        this.descripcionAnimal = a.descripcionAnimal;
-        this.fechaNacimiento = a.fechaNacimiento;
-        this.especie = a.especie;
-        this.fechaEntrada = a.fechaEntrada;
-        this.listaFotos = a.listaFotos;
+    protected Animal(Parcel in) {
+        idAnimal = in.readInt();
+        protectora = in.readString();
+        idProtectora = in.readInt();
+        nombre = in.readString();
+        tamanio = in.readString();
+        estado = in.readString();
+        descripcionAnimal = in.readString();
+        fechaNacimiento = in.readString();
+        especie = in.readString();
+        fechaEntrada = in.readString();
+        genero = in.readString();
+        listaFotos = in.createTypedArrayList(Bitmap.CREATOR);
     }
+
+    public static final Creator<Animal> CREATOR = new Creator<Animal>() {
+        @Override
+        public Animal createFromParcel(Parcel in) {
+            return new Animal(in);
+        }
+
+        @Override
+        public Animal[] newArray(int size) {
+            return new Animal[size];
+        }
+    };
 
     public int generarId(String nombre, int protectora){
         String id = nombre + protectora;
         return id.hashCode();
     }
 
-
-    protected Animal(Parcel in) {
-        idAnimal = in.readInt();
-        protectora = in.readString();
-        nombre = in.readString();
-        tamanio = in.readString();
-        estado = in.readString();
-        descripcionAnimal = in.readString();
-        especie = in.readString();
-        listaFotos = in.createTypedArrayList(Bitmap.CREATOR);
-    }
-
-
-    // GETTERS Y SETTERS
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
+    public Animal(int idAnimal, String protectora, int idProtectora, String nombre, String tamanio, String estado, String descripcionAnimal, String fechaNacimiento, String especie, String fechaEntrada, String genero, List<Bitmap> listaFotos) {
+        this.idAnimal = idAnimal;
+        this.protectora = protectora;
+        this.idProtectora = idProtectora;
+        this.nombre = nombre;
+        this.tamanio = tamanio;
+        this.estado = estado;
+        this.descripcionAnimal = descripcionAnimal;
+        this.fechaNacimiento = fechaNacimiento;
+        this.especie = especie;
+        this.fechaEntrada = fechaEntrada;
         this.genero = genero;
+        this.listaFotos = listaFotos;
     }
+
+
+// PARCELABLE
+
 
     public int getIdAnimal() {
         return idAnimal;
@@ -84,8 +94,16 @@ public class Animal implements Parcelable {
         return protectora;
     }
 
-    public void setProtectora(String idProtectora) {
-        this.protectora = idProtectora;
+    public void setProtectora(String protectora) {
+        this.protectora = protectora;
+    }
+
+    public int getIdProtectora() {
+        return idProtectora;
+    }
+
+    public void setIdProtectora(int idProtectora) {
+        this.idProtectora = idProtectora;
     }
 
     public String getNombre() {
@@ -144,6 +162,14 @@ public class Animal implements Parcelable {
         this.fechaEntrada = fechaEntrada;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
     public List<Bitmap> getListaFotos() {
         return listaFotos;
     }
@@ -151,21 +177,6 @@ public class Animal implements Parcelable {
     public void setListaFotos(List<Bitmap> listaFotos) {
         this.listaFotos = listaFotos;
     }
-
-
-    // PARCELABLE
-
-    public static final Creator<Animal> CREATOR = new Creator<Animal>() {
-        @Override
-        public Animal createFromParcel(Parcel in) {
-            return new Animal(in);
-        }
-
-        @Override
-        public Animal[] newArray(int size) {
-            return new Animal[size];
-        }
-    };
 
     @Override
     public int describeContents() {
@@ -176,11 +187,15 @@ public class Animal implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(idAnimal);
         parcel.writeString(protectora);
+        parcel.writeInt(idProtectora);
         parcel.writeString(nombre);
         parcel.writeString(tamanio);
         parcel.writeString(estado);
         parcel.writeString(descripcionAnimal);
+        parcel.writeString(fechaNacimiento);
         parcel.writeString(especie);
+        parcel.writeString(fechaEntrada);
+        parcel.writeString(genero);
         parcel.writeTypedList(listaFotos);
     }
 }

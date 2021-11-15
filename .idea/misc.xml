@@ -3,11 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/activity_animal.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/dialog_cita.xml" value="0.4768211920529801" />
-        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_subir.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_spinner.xml" value="0.26666666666666666" />
-        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_textview.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/Woolie/AndroidStudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/dialog_cita.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Woolie/AndroidStudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/item_spinner.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Woolie/AndroidStudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/item_spinner_verde.xml" value="0.20260416666666667" />
       </map>
     </option>
   </component>

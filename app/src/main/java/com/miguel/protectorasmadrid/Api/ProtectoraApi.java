@@ -27,4 +27,10 @@ public interface ProtectoraApi {
     Call<ArrayList<Cita>> getCitas(@Path("idProtectora") int idProtectora);
 
 
+    @FormUrlEncoded
+    @POST("/citasProtectora")
+    Call<ArrayList<String>> citasProtectora(
+            @Field("idProtectora") int idProtectora);
+
+
 }

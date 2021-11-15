@@ -1,7 +1,6 @@
 package com.miguel.protectorasmadrid.UsuarioActivities;
 
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,28 +11,27 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatSpinner;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
 import com.miguel.protectorasmadrid.Adapters.SliderAdapterAnimal;
 import com.miguel.protectorasmadrid.Api.AnimalApi;
 import com.miguel.protectorasmadrid.Api.Api;
+import com.miguel.protectorasmadrid.Api.ProtectoraApi;
 import com.miguel.protectorasmadrid.Api.UsuarioApi;
 import com.miguel.protectorasmadrid.Clases.Animal;
 import com.miguel.protectorasmadrid.Clases.Foto;
+import com.miguel.protectorasmadrid.Clases.Protectora;
 import com.miguel.protectorasmadrid.Clases.Usuario;
 import com.miguel.protectorasmadrid.Utils.Utiles;
 import com.miguel.protectorasmadrid.R;
@@ -94,6 +92,7 @@ public class AnimalActivity extends AppCompatActivity {
         sliderView.setIndicatorAnimation(IndicatorAnimationType.SCALE_DOWN); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         UsuarioApi serviceUsuario = Api.getClient().create(UsuarioApi.class);
+        ProtectoraApi serviceProtectora = Api.getClient().create(ProtectoraApi.class);
         AnimalApi serviceAnimal = Api.getClient().create(AnimalApi.class);
         Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
 
@@ -285,9 +284,53 @@ public class AnimalActivity extends AppCompatActivity {
                 });
 
                 AutoCompleteTextView spinner = dialogPersonalizado.findViewById(R.id.acHora);
-                String[] horas = {"10:00", "11:00","12:00", "13:00","14:00", "16:00","17:00", "18:00","19:00", "20:00"};
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, horas);
+                ArrayList<String> horas = new ArrayList<String>();
+                horas.add("10:00");horas.add("11:00");horas.add("12:00");horas.add("13:00");horas.add("14:00");horas.add("15:00");horas.add("16:00");
+                horas.add("17:00");horas.add("18:00");horas.add("19:00");horas.add("20:00");
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner_verde, horas);
                 spinner.setAdapter(adapter);
+
+                Call<ArrayList<String>> llamadacita = serviceProtectora.citasProtectora(animal.getIdProtectora());
+
+                llamadacita.enqueue(new Callback<ArrayList<String>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+
+                        ArrayList<String>listaAux = response.body();
+                        ArrayList<Integer>borrarLista = new ArrayList<>();
+                        int contador = 0;
+                        for (String citabbdd:listaAux) {
+
+                            for (String hora:horas) {
+
+                                String horaRecortada = hora.substring(0,2);
+
+                                if (citabbdd.equals(horaRecortada)){
+                                    borrarLista.add(contador);
+                                    contador = -1;
+                                    break;
+                                }
+                                contador++;
+                            }
+
+                        }
+                        for (int i :borrarLista) {
+
+                            horas.remove(i);
+
+                        }
+                        adapter.notifyDataSetChanged();
+
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+
+                    }
+                });
+
+
 
 
 
@@ -325,5 +368,20 @@ public class AnimalActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(compartir, "Compartir vía"));
             }
         });
+    }
+    public static int obtenerPosicionItem(Spinner spinner, String fruta) {
+        //Creamos la variable posicion y lo inicializamos en 0
+        int posicion = 0;
+        //Recorre el spinner en busca del ítem que coincida con el parametro `String fruta`
+        //que lo pasaremos posteriormente
+        for (int i = 0; i < spinner.getCount(); i++) {
+            //Almacena la posición del ítem que coincida con la búsqueda
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(fruta)) {
+                posicion = i;
+            }
+        }
+        //Devuelve un valor entero (si encontro una coincidencia devuelve la
+        // posición 0 o N, de lo contrario devuelve 0 = posición inicial)
+        return posicion;
     }
 }
