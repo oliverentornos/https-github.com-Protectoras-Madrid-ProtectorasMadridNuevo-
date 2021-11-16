@@ -276,6 +276,7 @@ public class AnimalActivity extends AppCompatActivity {
                                 Date date = new Date(selection + offsetFromUTC);
 
 
+
                                 etFechaCita.setText(simpleFormat.format(date));
 
                             }

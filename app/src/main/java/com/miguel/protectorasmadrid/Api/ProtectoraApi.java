@@ -24,7 +24,8 @@ public interface ProtectoraApi {
 
 
     @GET("/citasProtectora/{idProtectora}")
-    Call<ArrayList<Cita>> getCitas(@Path("idProtectora") int idProtectora);
+    Call<ArrayList<Cita>> getCitas(@Path("idProtectora") int idProtectora,
+                                   @Path("fecha") String fecha);
 
 
     @FormUrlEncoded

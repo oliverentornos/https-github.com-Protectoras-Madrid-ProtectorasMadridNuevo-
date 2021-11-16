@@ -68,7 +68,8 @@ public class CitasFragment extends AppCompatActivity {
 
         if (protectora.getidProtectora() != 0){
             ProtectoraApi serviceProtect = Api.getClient().create(ProtectoraApi.class);
-            Call<ArrayList<Cita>> listaCitas = serviceProtect.getCitas(preferences.getProtectora().getidProtectora());
+            String fecha = "";
+            Call<ArrayList<Cita>> listaCitas = serviceProtect.getCitas(preferences.getProtectora().getidProtectora(),fecha);
             listaCitas.enqueue(new Callback<ArrayList<Cita>>() {
                 @Override
                 public void onResponse(Call<ArrayList<Cita>> call, Response<ArrayList<Cita>> response) {

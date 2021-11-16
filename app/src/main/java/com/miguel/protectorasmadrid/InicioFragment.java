@@ -135,11 +135,6 @@ public class InicioFragment extends Fragment implements SearchView.OnQueryTextLi
             }
         });
 
-
-
-
-
-
         return root;
 
     }
