@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,26 +16,40 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.miguel.protectorasmadrid.CitasFragment;
+import com.miguel.protectorasmadrid.Clases.Usuario;
 import com.miguel.protectorasmadrid.Utils.Preferences;
+import com.miguel.protectorasmadrid.Utils.Utiles;
 import com.miguel.protectorasmadrid.databinding.FragmentCuentaUsuarioBinding;
 
 public class CuentaUsuario extends Fragment  {
 
 
     private FragmentCuentaUsuarioBinding binding;
+    private TextView tvNombreUsuario;
+    Preferences preferences;
+    ImageView imageViewCuenta;
+    private TextView tvPerfilUsuario;
 
     Activity activity;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+
         binding = binding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        preferences = new Preferences(getContext());
+        imageViewCuenta = binding.imageViewCuenta;
+        tvNombreUsuario = binding.tvNombreCuenta;
+        tvPerfilUsuario = binding.tvPerfil;
+        Usuario usuario = preferences.getUsuario();
 
 
-        Preferences preferences = new Preferences(getContext());
+
         if (preferences.hasCredentials()) {
             Toast.makeText(getContext(), "Estas logueado", Toast.LENGTH_SHORT).show();
+            tvNombreUsuario.setText(usuario.getNombre() +" "+usuario.getApe1());
+            imageViewCuenta.setImageBitmap(Utiles.base64ToBitmap(usuario.getImagen()));
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Inicia sesion");
@@ -53,6 +69,7 @@ public class CuentaUsuario extends Fragment  {
             });
             AlertDialog dialog = builder.create();
             dialog.setCanceledOnTouchOutside(false);
+
             dialog.show();
         }
 
@@ -61,6 +78,16 @@ public class CuentaUsuario extends Fragment  {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getContext(), CitasFragment.class);
+                startActivity(intent);
+
+            }
+        });
+
+        binding.tvLayoutPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getContext(), ActivityPerfil.class);
                 startActivity(intent);
 
             }

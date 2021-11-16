@@ -2,6 +2,7 @@ package com.miguel.protectorasmadrid.Api;
 
 import com.miguel.protectorasmadrid.Clases.Cita;
 import com.miguel.protectorasmadrid.Clases.Protectora;
+import com.miguel.protectorasmadrid.Clases.Usuario;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,10 @@ public interface ProtectoraApi {
     @GET("/citasProtectora/{idProtectora}")
     Call<ArrayList<Cita>> getCitas(@Path("idProtectora") int idProtectora);
 
+    @FormUrlEncoded
+    @POST("/fetch/protectora")
+    Call<Protectora> fetchProtectora(@Field("idProtectora") int idProtectora
+    );
 
     @FormUrlEncoded
     @POST("/citasProtectora")

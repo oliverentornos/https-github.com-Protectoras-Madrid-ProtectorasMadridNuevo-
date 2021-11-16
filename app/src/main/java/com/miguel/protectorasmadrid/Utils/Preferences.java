@@ -10,6 +10,7 @@ import android.util.Base64;
 import com.google.gson.Gson;
 import com.miguel.protectorasmadrid.Api.Api;
 
+import com.miguel.protectorasmadrid.Api.ProtectoraApi;
 import com.miguel.protectorasmadrid.Api.UsuarioApi;
 import com.miguel.protectorasmadrid.Clases.Protectora;
 import com.miguel.protectorasmadrid.Clases.Usuario;
@@ -64,11 +65,11 @@ public class Preferences {
         edit.apply();
     }
 
-    public void refreshCurrentUser(int clientId) {
+    public void refreshCurrentUser(int idUsuario) {
 
         UsuarioApi service = Api.getClient().create(UsuarioApi.class);
 
-        Call<Usuario> client = service.fetchClient(clientId);
+        Call<Usuario> client = service.fetchClient(idUsuario);
 
         client.enqueue(new Callback<Usuario>() {
             @Override
@@ -78,6 +79,26 @@ public class Preferences {
 
             @Override
             public void onFailure(Call<Usuario> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    public void refreshCurrentProtectora(int idProtectora) {
+
+        ProtectoraApi service = Api.getClient().create(ProtectoraApi.class);
+
+        Call<Protectora> client = service.fetchProtectora(idProtectora);
+
+        client.enqueue(new Callback<Protectora>() {
+            @Override
+            public void onResponse(Call<Protectora> call, Response<Protectora> response) {
+                saveCredentialsProtect(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Protectora> call, Throwable t) {
 
             }
         });

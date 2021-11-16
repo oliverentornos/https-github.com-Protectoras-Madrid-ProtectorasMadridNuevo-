@@ -72,4 +72,11 @@ public interface UsuarioApi {
             @Field("usuario") String usuario
     );
 
+
+    @FormUrlEncoded
+    @POST("/update/password")
+    Call<Void> updatePassword(
+            @Field("passwd") String passwd,
+            @Field("idUsuario") int idUsuario);
+
 }

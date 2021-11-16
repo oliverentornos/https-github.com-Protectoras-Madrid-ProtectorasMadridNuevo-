@@ -54,7 +54,7 @@ import retrofit2.Response;
 
 public class AnimalActivity extends AppCompatActivity {
 
-
+AnimalActivity activity;
     private TextView tvNombre, tvDesc, tvFechaEntrada, tvFechaNacimiento, tvGenero, tvTamaño, tvProtectora;
     private ImageView imgvAtras, imgvShare;
     //private ImageView imagen;
@@ -76,6 +76,7 @@ public class AnimalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_animal);
         listafavsIDS = new ArrayList<>();
         //imagen = findViewById(R.id.imgvAnimal);
+        activity = this;
         tvNombre = findViewById(R.id.tvNombre);
         tvDesc = findViewById(R.id.tvDesc);
         tvFechaEntrada = findViewById(R.id.tvFechaEntrada);
@@ -98,6 +99,10 @@ public class AnimalActivity extends AppCompatActivity {
         AnimalApi serviceAnimal = Api.getClient().create(AnimalApi.class);
         Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
         Usuario usuario = preferences.getUsuario();
+
+        if(!preferences.hasCredentials()){
+            btnPedirCita.setVisibility(View.INVISIBLE);
+        }
 
 
         llamadaanimal.enqueue(new Callback<Animal>() {
@@ -256,6 +261,7 @@ public class AnimalActivity extends AppCompatActivity {
         btnPedirCita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final Dialog dialogPersonalizado = new Dialog(AnimalActivity.this);
                 dialogPersonalizado.setContentView(R.layout.dialog_cita);
                 TextInputEditText etFechaCita = dialogPersonalizado.findViewById(R.id.etFechaCita);
@@ -352,26 +358,24 @@ public class AnimalActivity extends AppCompatActivity {
                 btnConfirmar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if (preferences.hasCredentials()) {
+                            Call<Void> llamadainsert = serviceProtectora.insertCita(animal.getIdAnimal(),animal.getIdProtectora(),usuario.getIdUsuario(),fecha,spinner.getText().toString());
 
-                        Call<Void> llamadainsert = serviceProtectora.insertCita(animal.getIdAnimal(),animal.getIdProtectora(),usuario.getIdUsuario(),fecha,spinner.getText().toString());
-
-                        llamadainsert.enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                if(response.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "Cita recibida :)", Toast.LENGTH_SHORT).show();
-                                    dialogPersonalizado.dismiss();
+                            llamadainsert.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    if(response.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(), "Cita recibida :)", Toast.LENGTH_SHORT).show();
+                                        dialogPersonalizado.dismiss();
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable t) {
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
 
-                            }
-                        });
-
-
-
+                                }
+                            });
+                        }
                     }
                 });
                 dialogPersonalizado.show();
