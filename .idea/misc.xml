@@ -3,9 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Woolie/AndroidStudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/dialog_cita.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/Woolie/AndroidStudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/item_spinner.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/Woolie/AndroidStudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/item_spinner_verde.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/activity_animal.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/activity_noticias.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/activity_noticias_protectora.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/dialog_cita.xml" value="0.4768211920529801" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_cuenta_protectora.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_home.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_noticias.xml" value="0.2574074074074074" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_second.xml" value="0.19947916666666668" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_subir.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_animal.xml" value="0.2574074074074074" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_citas.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_noticias.xml" value="0.33" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_sliderview.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_spinner.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_spinner_verde.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_textview.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/menu/bottom_nav_menu.xml" value="0.35885416666666664" />
+        <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/menu/bottom_nav_menu_usuario.xml" value="0.2528205128205128" />
       </map>
     </option>
   </component>

@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     Preferences preferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -35,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (preferences.hasCredentials()) {
             Protectora pro = preferences.getProtectora();
             Usuario usu = preferences.getUsuario();
-            if (usu.getIdUsuario()==0)
-            {
+            if (usu.getIdUsuario() == 0) {
                 startActivity(new Intent(getApplicationContext(), MainActivityProtectora.class));
             }
         }
@@ -51,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home_usuario,  R.id.navigation_notifications_usuario)
+                R.id.navigation_home_usuario, R.id.navigation_notifications_usuario,
+                R.id.navigation_noticias_usuario, R.id.navigation_favoritos_usuario)
                 .build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navViewUsuario, navController);
 
 
         // Scroll hacia inicio del recyclerView
-
-
         navView.setOnItemReselectedListener(new NavigationBarView.OnItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {

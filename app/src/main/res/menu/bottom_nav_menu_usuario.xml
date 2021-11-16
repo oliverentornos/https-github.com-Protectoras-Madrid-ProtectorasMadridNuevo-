@@ -5,7 +5,16 @@
         android:id="@+id/navigation_home_usuario"
         android:icon="@drawable/ic_home"
         android:title="@string/inicio" />
-    
+
+    <item
+        android:id="@+id/navigation_favoritos_usuario"
+        android:icon="@drawable/ic_fav_full"
+        android:title="Favoritos" />
+
+    <item
+        android:id="@+id/navigation_noticias_usuario"
+        android:icon="@drawable/ic_noticias"
+        android:title="Noticias" />
     <item
         android:id="@+id/navigation_notifications_usuario"
         android:icon="@drawable/ic_account"

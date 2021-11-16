@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 
 public class Utiles {
 
-    public static final String URL = "http://192.168.1.97:3000/";
+    public static final String URL = "http://dbprotectora.ddns.net:3000/";
 
     public static Bitmap base64ToBitmap(String base){
         String base64Image = base.split(",")[1];
