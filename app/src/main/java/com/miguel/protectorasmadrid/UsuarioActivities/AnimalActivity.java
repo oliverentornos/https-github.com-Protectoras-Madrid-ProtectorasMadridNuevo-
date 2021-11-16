@@ -79,6 +79,7 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
     List<Bitmap> fotosAnimal;
     List<Integer> listafavsIDS;
     String ubicacion;
+    String protectora;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,10 +110,7 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
         UsuarioApi serviceUsuario = Api.getClient().create(UsuarioApi.class);
         AnimalApi serviceAnimal = Api.getClient().create(AnimalApi.class);
 
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(this);
 
         Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
         llamadaanimal.enqueue(new Callback<Animal>() {
@@ -126,6 +124,9 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
                 AnimalApi service = Api.getClient().create(AnimalApi.class);
 
                 Call<List<Foto>> llamadaFotos = service.getImagenesAnimal(idAnimal);
+
+                ubicacion = animal.getUbicacion();
+                protectora = animal.getProtectora();
 
                 llamadaFotos.enqueue(new Callback<List<Foto>>() {
                     @Override
@@ -149,7 +150,7 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
                         tvGenero.setText(animal.getGenero());
                         tvTamaño.setText(animal.getTamanio());
                         tvProtectora.setText(animal.getProtectora());
-                        ubicacion = animal.getUbicacion();
+
 
 
                         // Metemos la lista de fotos en el Slider
@@ -354,6 +355,15 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
             }
         });
 
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+
+        mapFragment.getMapAsync(this);
 
     }
 
@@ -365,18 +375,20 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
         //añadimos el marcador
 
 
-//        double lat = Double.parseDouble(ubicacion.substring(0, ubicacion.indexOf(',') - 1));
-//        double lng = Double.parseDouble(ubicacion.substring(ubicacion.indexOf(',') + 1));
-//
-//        LatLng point = new LatLng(lat, lng);
-//
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions.position(point);
-//        markerOptions.title(point.latitude + " : " + point.longitude);
-//
-//        mapa.clear();
-//        googleMap.animateCamera(CameraUpdateFactory.newLatLng(point));
-//        googleMap.addMarker(markerOptions);
+        double lat = Double.parseDouble(ubicacion.substring(0, ubicacion.indexOf(',') - 1));
+        double lng = Double.parseDouble(ubicacion.substring(ubicacion.indexOf(',') + 1));
+
+        LatLng point = new LatLng(lat, lng);
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(point);
+        markerOptions.title(protectora);
+
+        mapa.getUiSettings().setScrollGesturesEnabled(false);
+        mapa.clear();
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 13));
+        googleMap.addMarker(markerOptions);
+
 
 
     }

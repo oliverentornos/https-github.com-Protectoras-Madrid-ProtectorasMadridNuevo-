@@ -11,6 +11,7 @@
         android:required="true" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
