@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ASUS/Desktop/Android/ProtectorasMadridNuevo/app/src/main/res/layout/activity_animal.xml" value="0.19895833333333332" />
+        <entry key="..\:/Users/ASUS/Desktop/Android/ProtectorasMadridNuevo/app/src/main/res/layout/fragment_subir.xml" value="0.3625" />
+        <entry key="..\:/Users/ASUS/Desktop/Android/ProtectorasMadridNuevo/app/src/main/res/layout/item_sliderview.xml" value="0.19895833333333332" />
         <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/activity_animal.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/dialog_cita.xml" value="0.4768211920529801" />
         <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_subir.xml" value="0.26666666666666666" />
@@ -12,7 +14,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -22,10 +22,10 @@ public class Utiles {
     public static String bitmapToBase64(Bitmap bitmap){
 
 
-        final Bitmap scaledBitmap = bitmap.createScaledBitmap(bitmap, 700, 600, true);
+        final Bitmap scaledBitmap = bitmap.createScaledBitmap(bitmap, bitmap.getWidth()/2, bitmap.getHeight()/2, true);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        scaledBitmap.compress(Bitmap.CompressFormat.PNG, 30, outputStream);
+        scaledBitmap.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
 
         return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }

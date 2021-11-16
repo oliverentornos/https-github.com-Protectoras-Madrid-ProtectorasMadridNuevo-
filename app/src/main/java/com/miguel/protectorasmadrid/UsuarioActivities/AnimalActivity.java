@@ -22,9 +22,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -46,6 +51,7 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,13 +78,13 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
     Animal animal;
     List<Bitmap> fotosAnimal;
     List<Integer> listafavsIDS;
+    String ubicacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animal);
-
 
 
         listafavsIDS = new ArrayList<>();
@@ -102,16 +108,17 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         UsuarioApi serviceUsuario = Api.getClient().create(UsuarioApi.class);
         AnimalApi serviceAnimal = Api.getClient().create(AnimalApi.class);
-        Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(this);
 
+        Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
         llamadaanimal.enqueue(new Callback<Animal>() {
             @Override
             public void onResponse(Call<Animal> call, Response<Animal> response) {
+
 
                 animal = response.body();
 
@@ -142,11 +149,15 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
                         tvGenero.setText(animal.getGenero());
                         tvTamaño.setText(animal.getTamanio());
                         tvProtectora.setText(animal.getProtectora());
+                        ubicacion = animal.getUbicacion();
+
 
                         // Metemos la lista de fotos en el Slider
                         adapter = new SliderAdapterAnimal(getApplicationContext(), animal.getListaFotos());
                         sliderView.setSliderAdapter(adapter);
                         adapter.notifyDataSetChanged();
+
+
 
                     }
 
@@ -154,15 +165,23 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
                     public void onFailure(Call<List<Foto>> call, Throwable t) {
 
                     }
+
+
+
                 });
 
 
             }
 
+
+
+
             @Override
             public void onFailure(Call<Animal> call, Throwable t) {
 
             }
+
+
         });
 
         if (preferences.hasCredentials()) {
@@ -296,11 +315,9 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
                 });
 
                 AutoCompleteTextView spinner = dialogPersonalizado.findViewById(R.id.acHora);
-                String[] horas = {"10:00", "11:00","12:00", "13:00","14:00", "16:00","17:00", "18:00","19:00", "20:00"};
+                String[] horas = {"10:00", "11:00", "12:00", "13:00", "14:00", "16:00", "17:00", "18:00", "19:00", "20:00"};
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner, horas);
                 spinner.setAdapter(adapter);
-
-
 
 
                 Button btnConfirmar = dialogPersonalizado.findViewById(R.id.btnConfirmar);
@@ -336,10 +353,31 @@ public class AnimalActivity extends AppCompatActivity implements OnMapReadyCallb
                 startActivity(Intent.createChooser(compartir, "Compartir vía"));
             }
         });
+
+
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mapa = googleMap;
+
+
+        //añadimos el marcador
+
+
+//        double lat = Double.parseDouble(ubicacion.substring(0, ubicacion.indexOf(',') - 1));
+//        double lng = Double.parseDouble(ubicacion.substring(ubicacion.indexOf(',') + 1));
+//
+//        LatLng point = new LatLng(lat, lng);
+//
+//        MarkerOptions markerOptions = new MarkerOptions();
+//        markerOptions.position(point);
+//        markerOptions.title(point.latitude + " : " + point.longitude);
+//
+//        mapa.clear();
+//        googleMap.animateCamera(CameraUpdateFactory.newLatLng(point));
+//        googleMap.addMarker(markerOptions);
+
+
     }
 }

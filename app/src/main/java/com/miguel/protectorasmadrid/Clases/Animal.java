@@ -21,6 +21,16 @@ public class Animal implements Parcelable {
     String especie;
     String fechaEntrada;
     String genero;
+    String ubicacion;
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
     List<Bitmap>listaFotos;
 
 
@@ -42,6 +52,7 @@ public class Animal implements Parcelable {
         this.especie = a.especie;
         this.fechaEntrada = a.fechaEntrada;
         this.listaFotos = a.listaFotos;
+        this.ubicacion = a.ubicacion;
     }
 
     public int generarId(String nombre, int protectora){
@@ -176,6 +187,7 @@ public class Animal implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(idAnimal);
         parcel.writeString(protectora);
+        parcel.writeString(ubicacion);
         parcel.writeString(nombre);
         parcel.writeString(tamanio);
         parcel.writeString(estado);

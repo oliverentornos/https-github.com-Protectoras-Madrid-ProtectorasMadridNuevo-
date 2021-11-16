@@ -227,6 +227,14 @@ public class SubirFragment extends AppCompatActivity {
 
     }
 
+    public void tomarFoto(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, 1);
+        }
+
+    }
+
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
@@ -241,6 +249,17 @@ public class SubirFragment extends AppCompatActivity {
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
 
                 adapter.addItem(bitmap);
+
+
+                imageSlider.setInfiniteAdapterEnabled(adapter.getCount() != 1);
+            } else if(reqCode == 1 && resultCode == RESULT_OK){
+                Bundle extras = data.getExtras();
+                Bitmap imgBitmap = (Bitmap) extras.get("data");
+
+                imageSlider.setSliderAdapter(adapter);
+
+
+                adapter.addItem(imgBitmap);
 
 
                 imageSlider.setInfiniteAdapterEnabled(adapter.getCount() != 1);
