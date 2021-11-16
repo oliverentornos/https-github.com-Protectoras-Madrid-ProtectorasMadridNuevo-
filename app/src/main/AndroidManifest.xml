@@ -41,10 +41,10 @@
         </activity>
         <activity
             android:name=".UsuarioActivities.LoginActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".MainActivityProtectora"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".CitasFragment"
             android:exported="true" />

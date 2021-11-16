@@ -58,9 +58,12 @@ public class ActivityCambioPass extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 preferences.refreshCurrentUser(sharedUsuario.getIdUsuario());
+                                preferences.saveCredentials(sharedUsuario);
+                                sharedUsuario.setPasswd(newPassword);
                                 binding.tvpassActual.setText("");
                                 binding.tvpassNuevaRep.setText("");
                                 binding.tvpassNueva.setText("");
+
                                 Toast.makeText(getApplicationContext(), "Contraseña cambiada", Toast.LENGTH_SHORT).show();
                                 finish();
                             }

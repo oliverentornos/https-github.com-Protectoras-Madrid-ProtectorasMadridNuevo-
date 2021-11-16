@@ -1,7 +1,10 @@
 package com.miguel.protectorasmadrid.UsuarioActivities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.miguel.protectorasmadrid.Api.Api;
+import com.miguel.protectorasmadrid.Api.UsuarioApi;
 import com.miguel.protectorasmadrid.CitasFragment;
 import com.miguel.protectorasmadrid.Clases.Protectora;
 import com.miguel.protectorasmadrid.Clases.Usuario;
@@ -30,14 +35,22 @@ import com.miguel.protectorasmadrid.Utils.Preferences;
 import com.miguel.protectorasmadrid.Utils.Utiles;
 import com.miguel.protectorasmadrid.databinding.ActivityMainBinding;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class ActivityPerfil extends AppCompatActivity {
-
+    UsuarioApi serviceUsuario = Api.getClient().create(UsuarioApi.class);
     private ActivityMainBinding binding;
     Preferences preferences;
     ImageView imagen;
     TextView tvNombreUsuario;
     Button btnCerrarSesion,btnCambiarPasswdUsu,btnCambiarFotoUsu;
+    Usuario usuario = MainActivity.usu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +68,7 @@ public class ActivityPerfil extends AppCompatActivity {
         tvNombreUsuario = findViewById(R.id.tvNombreCuentaUsuario);
                 imagen = findViewById(R.id.imageViewCuentaUsuario);
 
-        Usuario usuario = preferences.getUsuario();
+        Usuario usuario = MainActivity.usu;
 
         tvNombreUsuario.setText(usuario.getNombre() +" "+usuario.getApe1());
         imagen.setImageBitmap(Utiles.base64ToBitmap(usuario.getImagen()));
@@ -82,7 +95,63 @@ btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
     }
 });
 
+btnCambiarFotoUsu.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+
+        addFoto(view);
+
+    }
+});
+
 
 
     }
+
+    public void addFoto(View view) {
+        Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(i, 100);
+
+    }
+
+    @Override
+    protected void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+
+        Uri imageUri;
+        Bitmap bitmap;
+        try {
+            if (resultCode == RESULT_OK && reqCode == 100) {
+                imageUri = data.getData();
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                imagen.setImageBitmap(bitmap);
+                MainActivity.usu.setImagen("data:image/png;base64,"+Utiles.bitmapToBase64(bitmap));
+
+                Call<Void> llamadaimagen = serviceUsuario.updateImagen(usuario.getIdUsuario(),"data:image/png;base64,"+usuario.getImagen());
+
+                llamadaimagen.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        if (response.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), "Foto cambiada correctamente", Toast.LENGTH_SHORT).show();
+
+                            CuentaUsuario.imageViewCuenta.setImageBitmap(bitmap);
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

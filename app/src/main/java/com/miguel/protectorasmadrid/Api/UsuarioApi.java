@@ -33,6 +33,12 @@ public interface UsuarioApi {
     );
 
     @FormUrlEncoded
+    @POST("/update/imagen")
+    Call<Void> updateImagen(@Field("idUsuario") int idUsuario,
+                               @Field("imagen") String imagen
+    );
+
+    @FormUrlEncoded
     @POST("/animalesFav")
     Call<List<Integer>> getAnimalesFav(@Field("idUsuario") int idUsuario
     );

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.miguel.protectorasmadrid.CitasFragment;
 import com.miguel.protectorasmadrid.Clases.Usuario;
+import com.miguel.protectorasmadrid.MainActivity;
 import com.miguel.protectorasmadrid.Utils.Preferences;
 import com.miguel.protectorasmadrid.Utils.Utiles;
 import com.miguel.protectorasmadrid.databinding.FragmentCuentaUsuarioBinding;
@@ -27,7 +28,7 @@ public class CuentaUsuario extends Fragment  {
     private FragmentCuentaUsuarioBinding binding;
     private TextView tvNombreUsuario;
     Preferences preferences;
-    ImageView imageViewCuenta;
+   static ImageView imageViewCuenta;
     private TextView tvPerfilUsuario;
 
     Activity activity;
@@ -42,11 +43,11 @@ public class CuentaUsuario extends Fragment  {
         imageViewCuenta = binding.imageViewCuenta;
         tvNombreUsuario = binding.tvNombreCuenta;
         tvPerfilUsuario = binding.tvPerfil;
-        Usuario usuario = preferences.getUsuario();
+        Usuario usuario = MainActivity.usu;
 
 
 
-        if (preferences.hasCredentials()) {
+        if (usuario!=null) {
             Toast.makeText(getContext(), "Estas logueado", Toast.LENGTH_SHORT).show();
             tvNombreUsuario.setText(usuario.getNombre() +" "+usuario.getApe1());
             imageViewCuenta.setImageBitmap(Utiles.base64ToBitmap(usuario.getImagen()));
@@ -92,6 +93,10 @@ public class CuentaUsuario extends Fragment  {
 
             }
         });
+
+
+
+
 
 
         return root;

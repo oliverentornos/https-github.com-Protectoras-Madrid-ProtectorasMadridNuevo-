@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     Preferences preferences;
+    public static Usuario usu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
         preferences = new Preferences(getApplicationContext());
         if (preferences.hasCredentials()) {
             Protectora pro = preferences.getProtectora();
-            Usuario usu = preferences.getUsuario();
-            if (usu.getIdUsuario()==0)
-            {
+           usu = preferences.getUsuario();
+            if(usu!=null){
+            if(pro.getidProtectora()!=0)
                 startActivity(new Intent(getApplicationContext(), MainActivityProtectora.class));
             }
+
         }
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

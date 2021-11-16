@@ -100,7 +100,7 @@ AnimalActivity activity;
         Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
         Usuario usuario = preferences.getUsuario();
 
-        if(!preferences.hasCredentials()){
+        if(usuario==null){
             btnPedirCita.setVisibility(View.INVISIBLE);
         }
 
@@ -161,7 +161,7 @@ AnimalActivity activity;
             }
         });
 
-        if (preferences.hasCredentials()) {
+        if (usuario!=null) {
 
             Call<List<Integer>> llamadaFavs = serviceUsuario.getAnimalesFav(usuario.getIdUsuario());
 
@@ -194,7 +194,7 @@ AnimalActivity activity;
             public void liked(LikeButton likeButton) {
 
 
-                if (preferences.hasCredentials()) {
+                if (usuario !=null) {
                     Usuario usuario = preferences.getUsuario();
                     Call<Void> llamadainsert = serviceUsuario.insertFav(usuario.getIdUsuario(), idAnimal);
 
