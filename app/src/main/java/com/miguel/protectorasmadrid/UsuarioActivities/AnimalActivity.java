@@ -29,6 +29,7 @@ import com.miguel.protectorasmadrid.Api.AnimalApi;
 import com.miguel.protectorasmadrid.Api.Api;
 import com.miguel.protectorasmadrid.Api.ProtectoraApi;
 import com.miguel.protectorasmadrid.Api.UsuarioApi;
+import com.miguel.protectorasmadrid.CitasFragment;
 import com.miguel.protectorasmadrid.Clases.Animal;
 import com.miguel.protectorasmadrid.Clases.Foto;
 import com.miguel.protectorasmadrid.Clases.Protectora;
@@ -64,9 +65,10 @@ public class AnimalActivity extends AppCompatActivity {
     Preferences preferences;
     int idAnimal;
     Animal animal;
+    String fecha;
     List<Bitmap> fotosAnimal;
     List<Integer> listafavsIDS;
-
+    AutoCompleteTextView spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -95,6 +97,7 @@ public class AnimalActivity extends AppCompatActivity {
         ProtectoraApi serviceProtectora = Api.getClient().create(ProtectoraApi.class);
         AnimalApi serviceAnimal = Api.getClient().create(AnimalApi.class);
         Call<Animal> llamadaanimal = serviceAnimal.getAnimalId(idAnimal);
+        Usuario usuario = preferences.getUsuario();
 
 
         llamadaanimal.enqueue(new Callback<Animal>() {
@@ -154,7 +157,7 @@ public class AnimalActivity extends AppCompatActivity {
         });
 
         if (preferences.hasCredentials()) {
-            Usuario usuario = preferences.getUsuario();
+
             Call<List<Integer>> llamadaFavs = serviceUsuario.getAnimalesFav(usuario.getIdUsuario());
 
             llamadaFavs.enqueue(new Callback<List<Integer>>() {
@@ -255,8 +258,8 @@ public class AnimalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final Dialog dialogPersonalizado = new Dialog(AnimalActivity.this);
                 dialogPersonalizado.setContentView(R.layout.dialog_cita);
-
                 TextInputEditText etFechaCita = dialogPersonalizado.findViewById(R.id.etFechaCita);
+
                 etFechaCita.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -279,57 +282,66 @@ public class AnimalActivity extends AppCompatActivity {
 
                                 etFechaCita.setText(simpleFormat.format(date));
 
+                                 fecha = etFechaCita.getText().toString();
+
+                                spinner = dialogPersonalizado.findViewById(R.id.acHora);
+                                ArrayList<String> horas = new ArrayList<String>();
+                                horas.add("10:00");horas.add("11:00");horas.add("12:00");horas.add("13:00");horas.add("14:00");horas.add("15:00");horas.add("16:00");
+                                horas.add("17:00");horas.add("18:00");horas.add("19:00");horas.add("20:00");
+                                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner_verde, horas);
+                                spinner.setAdapter(adapter);
+
+                                Call<ArrayList<String>> llamadacita = serviceProtectora.citasProtectora(animal.getIdProtectora(),fecha);
+
+                                llamadacita.enqueue(new Callback<ArrayList<String>>() {
+                                    @Override
+                                    public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+
+                                        ArrayList<String>listaAux = response.body();
+                                        ArrayList<Integer>borrarLista = new ArrayList<>();
+                                        int contador = 0;
+                                        for (String citabbdd:listaAux) {
+
+                                            for (String hora:horas) {
+
+                                                String horaRecortada = hora.substring(0,2);
+
+                                                if (citabbdd.equals(horaRecortada)){
+                                                    borrarLista.add(contador);
+                                                    contador = -1;
+                                                    break;
+                                                }
+                                                contador++;
+                                            }
+
+                                        }
+                                        for (int i :borrarLista) {
+
+                                            horas.remove(i);
+
+
+                                        }
+                                        adapter.notifyDataSetChanged();
+
+
+                                    }
+
+
+                                    @Override
+                                    public void onFailure(Call<ArrayList<String>> call, Throwable t) {
+
+                                    }
+                                });
+
+
+
+
                             }
                         });
                     }
                 });
 
-                AutoCompleteTextView spinner = dialogPersonalizado.findViewById(R.id.acHora);
-                ArrayList<String> horas = new ArrayList<String>();
-                horas.add("10:00");horas.add("11:00");horas.add("12:00");horas.add("13:00");horas.add("14:00");horas.add("15:00");horas.add("16:00");
-                horas.add("17:00");horas.add("18:00");horas.add("19:00");horas.add("20:00");
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.item_spinner_verde, horas);
-                spinner.setAdapter(adapter);
 
-                Call<ArrayList<String>> llamadacita = serviceProtectora.citasProtectora(animal.getIdProtectora());
-
-                llamadacita.enqueue(new Callback<ArrayList<String>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-
-                        ArrayList<String>listaAux = response.body();
-                        ArrayList<Integer>borrarLista = new ArrayList<>();
-                        int contador = 0;
-                        for (String citabbdd:listaAux) {
-
-                            for (String hora:horas) {
-
-                                String horaRecortada = hora.substring(0,2);
-
-                                if (citabbdd.equals(horaRecortada)){
-                                    borrarLista.add(contador);
-                                    contador = -1;
-                                    break;
-                                }
-                                contador++;
-                            }
-
-                        }
-                        for (int i :borrarLista) {
-
-                            horas.remove(i);
-
-                        }
-                        adapter.notifyDataSetChanged();
-
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<String>> call, Throwable t) {
-
-                    }
-                });
 
 
 
@@ -340,7 +352,26 @@ public class AnimalActivity extends AppCompatActivity {
                 btnConfirmar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT).show();
+
+                        Call<Void> llamadainsert = serviceProtectora.insertCita(animal.getIdAnimal(),animal.getIdProtectora(),usuario.getIdUsuario(),fecha,spinner.getText().toString());
+
+                        llamadainsert.enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if(response.isSuccessful()){
+                                    Toast.makeText(getApplicationContext(), "Cita recibida :)", Toast.LENGTH_SHORT).show();
+                                    dialogPersonalizado.dismiss();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+
+                            }
+                        });
+
+
+
                     }
                 });
                 dialogPersonalizado.show();

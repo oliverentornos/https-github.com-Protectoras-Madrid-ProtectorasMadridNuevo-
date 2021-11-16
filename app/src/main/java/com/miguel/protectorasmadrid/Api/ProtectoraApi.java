@@ -24,14 +24,24 @@ public interface ProtectoraApi {
 
 
     @GET("/citasProtectora/{idProtectora}")
-    Call<ArrayList<Cita>> getCitas(@Path("idProtectora") int idProtectora,
-                                   @Path("fecha") String fecha);
+    Call<ArrayList<Cita>> getCitas(@Path("idProtectora") int idProtectora);
 
 
     @FormUrlEncoded
     @POST("/citasProtectora")
     Call<ArrayList<String>> citasProtectora(
-            @Field("idProtectora") int idProtectora);
+            @Field("idProtectora") int idProtectora,
+            @Field("fecha") String fecha);
+
+
+    @FormUrlEncoded
+    @POST("/insertCita")
+    Call<Void> insertCita(
+            @Field("idAnimal") int idAnimal,
+            @Field("idProtectora") int idProtectora,
+            @Field("idUsuario") int idUsuario,
+            @Field("fecha") String fecha,
+            @Field("hora") String hora);
 
 
 }
