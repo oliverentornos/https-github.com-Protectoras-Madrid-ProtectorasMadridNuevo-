@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,8 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.miguel.protectorasmadrid.CitasFragment;
 import com.miguel.protectorasmadrid.Clases.Protectora;
 import com.miguel.protectorasmadrid.Clases.Usuario;
+import com.miguel.protectorasmadrid.InicioFragment;
+import com.miguel.protectorasmadrid.MainActivity;
 import com.miguel.protectorasmadrid.MainActivityProtectora;
 import com.miguel.protectorasmadrid.R;
 import com.miguel.protectorasmadrid.Utils.Preferences;
@@ -72,6 +75,10 @@ btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
         preferences.forgetCredentials();
+        Toast.makeText(getApplicationContext(), "Sesion cerrada", Toast.LENGTH_SHORT).show();
+        finish();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 });
 
