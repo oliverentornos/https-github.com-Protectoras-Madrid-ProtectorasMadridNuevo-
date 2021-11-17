@@ -47,7 +47,7 @@ public class CuentaUsuario extends Fragment  {
 
 
 
-        if (usuario!=null) {
+        if (preferences.hasCredentials()) {
             Toast.makeText(getContext(), "Estas logueado", Toast.LENGTH_SHORT).show();
             tvNombreUsuario.setText(usuario.getNombre() +" "+usuario.getApe1());
             imageViewCuenta.setImageBitmap(Utiles.base64ToBitmap(usuario.getImagen()));
