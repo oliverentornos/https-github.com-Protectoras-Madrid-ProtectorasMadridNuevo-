@@ -14,6 +14,17 @@
 
 
     <fragment
+        android:id="@+id/navigation_favoritos_usuario"
+        android:name="com.miguel.protectorasmadrid.UsuarioActivities.FavoritosFragment"
+        android:label="Favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+
+    <fragment
+        android:id="@+id/navigation_noticias_usuario"
+        android:name="com.miguel.protectorasmadrid.UsuarioActivities.NoticiasFragment"
+        android:label="Noticias"
+        tools:layout="@layout/fragment_noticias" />
+    <fragment
         android:id="@+id/navigation_home_usuario"
         android:name="com.miguel.protectorasmadrid.InicioFragment"
         android:label="Inicio"
