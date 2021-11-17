@@ -14,8 +14,8 @@ import android.widget.LinearLayout;
 import com.miguel.protectorasmadrid.Adapters.NoticiasAdapter;
 import com.miguel.protectorasmadrid.Clases.Noticia;
 import com.miguel.protectorasmadrid.R;
-import com.miguel.protectorasmadrid.databinding.FragmentCitasProtectoraBinding;
-import com.miguel.protectorasmadrid.databinding.FragmentNoticiasBinding;
+
+import com.miguel.protectorasmadrid.databinding.FragmentNoticiasUsuarioBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class NoticiasFragment extends Fragment {
 
-    FragmentNoticiasBinding binding;
+    FragmentNoticiasUsuarioBinding binding;
 
     private RecyclerView recyclerNoticias;
     private NoticiasAdapter adapter;

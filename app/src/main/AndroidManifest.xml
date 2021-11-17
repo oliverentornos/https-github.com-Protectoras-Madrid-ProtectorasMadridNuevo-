@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ProtectorasMadrid"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".NoticiaActivity"
+            android:exported="false" />
+        <activity
             android:name=".NoticiasActivity"
             android:exported="true" />
         <activity

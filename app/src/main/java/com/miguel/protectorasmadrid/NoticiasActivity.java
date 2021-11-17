@@ -23,7 +23,7 @@ public class NoticiasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_noticias);
+        setContentView(R.layout.activity_noticias_protectora);
 
         listNoticias = new ArrayList<>();
         recycler = findViewById(R.id.recyclerNoticiasProtectora);

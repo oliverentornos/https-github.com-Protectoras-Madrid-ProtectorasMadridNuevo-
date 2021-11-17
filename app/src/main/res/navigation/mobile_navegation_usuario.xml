@@ -23,7 +23,7 @@
         android:id="@+id/navigation_noticias_usuario"
         android:name="com.miguel.protectorasmadrid.UsuarioActivities.NoticiasFragment"
         android:label="Noticias"
-        tools:layout="@layout/fragment_noticias" />
+        tools:layout="@layout/fragment_noticias_usuario" />
     <fragment
         android:id="@+id/navigation_home_usuario"
         android:name="com.miguel.protectorasmadrid.InicioFragment"

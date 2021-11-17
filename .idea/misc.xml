@@ -11,6 +11,9 @@
         <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/fragment_subir.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_spinner.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/migue/Desktop/ProtectorasMadrid-master/app/src/main/res/layout/item_textview.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/practicas/StudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/activity_animal.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/practicas/StudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/activity_noticia.xml" value="0.264" />
+        <entry key="..\:/Users/practicas/StudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/activity_noticia2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/practicas/StudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/activity_noticias.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/practicas/StudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/fragment_cuenta_protectora.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/practicas/StudioProjects/ProtectorasMadridNuevo/app/src/main/res/layout/fragment_cuenta_usuario.xml" value="0.25416666666666665" />
@@ -23,5 +26,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.25416666666666665" />
+      </ProjectState>
+    </option>
   </component>
 </project>

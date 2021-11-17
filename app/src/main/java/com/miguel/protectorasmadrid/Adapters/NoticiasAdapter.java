@@ -1,6 +1,7 @@
 package com.miguel.protectorasmadrid.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.miguel.protectorasmadrid.Clases.Noticia;
+import com.miguel.protectorasmadrid.NoticiaActivity;
 import com.miguel.protectorasmadrid.R;
 
 import java.util.ConcurrentModificationException;
@@ -61,6 +63,19 @@ public class NoticiasAdapter extends RecyclerView.Adapter<NoticiasAdapter.ViewHo
             tvFecha = itemView.findViewById(R.id.tvFechaNoticia);
             tvProtectora = itemView.findViewById(R.id.tvNomProtectora);
             fotoNoticia = itemView.findViewById(R.id.imgvFotoNoticia);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+
+                    Intent i = new Intent(context, NoticiaActivity.class);
+                    i.putExtra("Titulo", listaNoticias.get(pos).getTitulo());
+                    i.putExtra("Desc", listaNoticias.get(pos).getDescripcion());
+                    i.putExtra("Fecha", listaNoticias.get(pos).getFecha());
+                    context.startActivity(i);
+                }
+            });
 
         }
     }
