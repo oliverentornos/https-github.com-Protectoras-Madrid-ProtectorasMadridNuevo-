@@ -89,6 +89,7 @@ btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
         preferences.forgetCredentials();
         Toast.makeText(getApplicationContext(), "Sesion cerrada", Toast.LENGTH_SHORT).show();
+
         finish();
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
@@ -125,9 +126,8 @@ btnCambiarFotoUsu.setOnClickListener(new View.OnClickListener() {
                 imageUri = data.getData();
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 imagen.setImageBitmap(bitmap);
-                MainActivity.usu.setImagen("data:image/png;base64,"+Utiles.bitmapToBase64(bitmap));
 
-                Call<Void> llamadaimagen = serviceUsuario.updateImagen(usuario.getIdUsuario(),"data:image/png;base64,"+usuario.getImagen());
+                Call<Void> llamadaimagen = serviceUsuario.updateImagen(usuario.getIdUsuario(),"data:image/png;base64,"+Utiles.bitmapToBase64(bitmap));
 
                 llamadaimagen.enqueue(new Callback<Void>() {
                     @Override
@@ -137,6 +137,9 @@ btnCambiarFotoUsu.setOnClickListener(new View.OnClickListener() {
                             Toast.makeText(getApplicationContext(), "Foto cambiada correctamente", Toast.LENGTH_SHORT).show();
 
                             CuentaUsuario.imageViewCuenta.setImageBitmap(bitmap);
+                            preferences.forgetCredentials();
+                            preferences.saveCredentials(MainActivity.usu);
+                            MainActivity.usu.setImagen("data:image/png;base64,"+Utiles.bitmapToBase64(bitmap));
 
                         }
                     }
