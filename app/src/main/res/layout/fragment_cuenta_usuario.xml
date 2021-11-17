@@ -86,27 +86,7 @@
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_arrow" />
     </RelativeLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:paddingStart="15dp">
 
-        <TextView
-            android:id="@+id/tvNoticias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Noticias"
-            android:textSize="16dp"
-            android:textStyle="bold" />
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_arrow" />
-    </RelativeLayout>
     <RelativeLayout
         android:id="@+id/tvLayoutPerfil"
         android:layout_width="match_parent"

@@ -121,6 +121,7 @@
             android:src="@drawable/ic_arrow" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/btnNoticias_protec"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"

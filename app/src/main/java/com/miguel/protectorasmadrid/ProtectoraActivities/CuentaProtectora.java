@@ -14,13 +14,14 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.miguel.protectorasmadrid.CitasFragment;
+import com.miguel.protectorasmadrid.NoticiasActivity;
 import com.miguel.protectorasmadrid.UsuarioActivities.LoginActivity;
 import com.miguel.protectorasmadrid.UsuarioActivities.RegisterActivity;
 import com.miguel.protectorasmadrid.Utils.Preferences;
 import com.miguel.protectorasmadrid.databinding.FragmentCuentaProtectoraBinding;
 
 
-public class CuentaProtectora extends Fragment  {
+public class CuentaProtectora extends Fragment {
 
 
     private FragmentCuentaProtectoraBinding binding;
@@ -35,22 +36,31 @@ public class CuentaProtectora extends Fragment  {
         View root = binding.getRoot();
 
 
-binding.fragmentCitasProtec.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+        binding.fragmentCitasProtec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        Intent intent = new Intent(getContext(), CitasFragment.class);
-        startActivity(intent);
+                Intent intent = new Intent(getContext(), CitasFragment.class);
+                startActivity(intent);
 
-    }
-});
+            }
+        });
+        binding.btnNoticiasProtec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-binding.tvTusAnimales.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
+                Intent intent = new Intent(getContext(), NoticiasActivity.class);
+                startActivity(intent);
 
-    }
-});
+            }
+        });
+
+        binding.tvTusAnimales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         Preferences preferences = new Preferences(getContext());
         if (preferences.hasCredentials()) {
@@ -86,7 +96,6 @@ binding.tvTusAnimales.setOnClickListener(new View.OnClickListener() {
         super.onDestroyView();
         binding = null;
     }
-
 
 
 }
